@@ -2025,7 +2025,7 @@ class Container extends Scriptable {
     _canHaveRepeatingChildren(mode = 'create') {
         const items = this._jsonModel.items;
         return this._jsonModel.type == 'array' && this.getDataNode() != null &&
-            (items.length === 1 || (items[0].repeatable == true && mode === 'restore'));
+            (items.length === 1 || (items.length > 0 && items[0].repeatable == true && mode === 'restore'));
     }
     _initialize(mode) {
         super._initialize(mode);
