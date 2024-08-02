@@ -258,7 +258,9 @@ function applyRuleEngine(htmlForm, form, captcha) {
 
 export async function loadRuleEngine(formDef, htmlForm, captcha, genFormRendition, data) {
   const ruleEngine = await import('./model/afb-runtime.js');
-  const form = ruleEngine.restoreFormInstance(formDef, data);
+
+  const formInstance = ruleEngine.createFormInstance(formDef);
+  const form = ruleEngine.restoreFormInstance(formInstance.getState(true), data);
   window.myForm = form;
 
   form.subscribe((e) => {
