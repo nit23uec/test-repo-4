@@ -116,10 +116,9 @@ function annotateItems(items, formDefinition, formFieldMap) {
             fieldWrapper.setAttribute('data-aue-behavior', 'component');
             fieldWrapper.setAttribute('data-aue-filter', 'form');
             annotateItems(fieldWrapper.childNodes, formDefinition, formFieldMap);
-            //handle wizard step selection
-            if (activeWizardStep && fieldWrapper.classList.contains('wizard')) {
-              const activeWizardStep = fieldWrapper.querySelector(`[data-id='${activeWizardStep}']`);
-              handleWizardNavigation(fieldWrapper, activeWizardStep);
+            //retain wizard step selection
+            if (activeWizardStep === fieldWrapper.dataset.id ) {
+              handleWizardNavigation(fieldWrapper.parentElement, fieldWrapper);
             }
           }
         } else {
