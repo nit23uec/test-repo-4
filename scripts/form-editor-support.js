@@ -21,6 +21,7 @@ import decorate, { generateFormRendition } from '../blocks/form/form.js';
 import { loadCSS } from './aem.js';
 
 window.currentMode = 'preview';
+activeWizardStep;
 
 export function getItems(container) {
   if (container[':itemsOrder'] && container[':items']) {
@@ -115,6 +116,11 @@ function annotateItems(items, formDefinition, formFieldMap) {
             fieldWrapper.setAttribute('data-aue-behavior', 'component');
             fieldWrapper.setAttribute('data-aue-filter', 'form');
             annotateItems(fieldWrapper.childNodes, formDefinition, formFieldMap);
+            //handle wizard step selection
+            if (activeWizardStep && fieldWrapper.classList.contains('wizard')) {
+              const activeWizardStep = fieldWrapper.querySelector(`[data-id='${activeWizardStep}']`);
+              handleWizardNavigation(fieldWrapper, activeWizardStep);
+            }
           }
         } else {
           fieldWrapper.setAttribute('data-aue-type', 'component');
@@ -145,6 +151,7 @@ function handleWizardNavigation(wizardEl, navigateTo) {
   const existingSelectedEl = wizardEl.querySelector('.current-wizard-step');
   existingSelectedEl.classList.remove('current-wizard-step');
   navigateTo.classList.add('current-wizard-step');
+  activeWizardStep = navigateTo.dataset.id;
   const navigateToMenuItem = wizardEl.querySelector(`li[data-index="${navigateTo.dataset.index}"]`);
   const currentMenuItem = wizardEl.querySelector('.wizard-menu-active-item');
   currentMenuItem.classList.remove('wizard-menu-active-item');
