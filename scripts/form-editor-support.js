@@ -21,7 +21,7 @@ import decorate, { generateFormRendition } from '../blocks/form/form.js';
 import { loadCSS } from './aem.js';
 
 window.currentMode = 'preview';
-activeWizardStep;
+var activeWizardStep;
 
 export function getItems(container) {
   if (container[':itemsOrder'] && container[':items']) {
