@@ -123,7 +123,7 @@ function annotateItems(items, formDefinition, formFieldMap) {
               }
             }
           } else {
-            fieldWrapper1.setAttribute('data-aue-type', 'component');
+            fieldWrapper.setAttribute('data-aue-type', 'component');
             fieldWrapper.setAttribute('data-aue-resource', `urn:aemconnection:${fd.properties['fd:path']}`);
             fieldWrapper.setAttribute('data-aue-model', getPropertyModel(fd));
             fieldWrapper.setAttribute('data-aue-label', fd.label?.value || fd.name);
