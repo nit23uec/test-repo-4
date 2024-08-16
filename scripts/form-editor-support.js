@@ -281,7 +281,8 @@ export async function applyChanges(event) {
           }
           const parent = element.closest('.panel-wrapper') || element.closest('form') || element.querySelector('form');
           const parentDef = getFieldById(formDef, parent.dataset.id, {});
-          if (parent.classList.contains('panel-wrapper') && panelLabel) {
+          if (parent.classList.contains('panel-wrapper')) {
+            panelLabel = parent.querySelector('legend');
             parent.replaceChildren(panelLabel);
           } else {
             parent.replaceChildren();
